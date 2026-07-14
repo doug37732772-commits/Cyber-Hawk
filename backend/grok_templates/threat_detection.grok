@@ -1,0 +1,25 @@
+# Threat Detection Rules
+
+# SQL Injection Pattern
+PATTERN sql_injection (union|select|insert|update|delete|drop|create).*from.*where|--|\\'|;|\\"|\\*\\s*(from|where|having|group)
+
+# XSS Pattern
+PATTERN xss_attack <script|javascript:|onerror=|onload=|<iframe|<object|<embed
+
+# Command Injection
+PATTERN command_injection ;|\\||&&|`|\\$\\(|\\|\\||&\\||>\\/dev\\/null
+
+# Port Scan Detection
+PATTERN port_scan_attempt connection.*refused|reset.*by.*peer|network.*unreachable
+
+# Brute Force Detection
+PATTERN brute_force_attempt Failed.*for.*user.*from.*[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}
+
+# Privilege Escalation
+PATTERN privilege_escalation sudo|su -|setuid|chmod.*777
+
+# Data Exfiltration
+PATTERN data_exfiltration sftp://|scp://|ftp://|\\\"(data|password|secret|token)\\\":\
+
+# Malware Signature
+PATTERN malware_signature mimikatz|psexec|metasploit|meterpreter|shellcode
